@@ -35,22 +35,10 @@ CXString createEmpty();
 CXString createNull();
 
 /// Create a CXString object from a nul-terminated C string.  New
-/// CXString may contain a pointer to \p String.
-///
-/// \p String should not be changed by the caller afterwards.
-CXString createRef(const char *String);
-
-/// Create a CXString object from a nul-terminated C string.  New
 /// CXString will contain a copy of \p String.
 ///
 /// \p String can be changed or freed by the caller.
 CXString createDup(const char *String);
-
-/// Create a CXString object from a StringRef.  New CXString may
-/// contain a pointer to the undrelying data of \p String.
-///
-/// \p String should not be changed by the caller afterwards.
-CXString createRef(StringRef String);
 
 /// Create a CXString object from a StringRef.  New CXString will
 /// contain a copy of \p String.

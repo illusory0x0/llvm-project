@@ -54,16 +54,6 @@ CXString createNull() {
   return Str;
 }
 
-CXString createRef(const char *String) {
-  if (String && String[0] == '\0')
-    return createEmpty();
-
-  CXString Str;
-  Str.data = String;
-  Str.private_flags = CXS_Unmanaged;
-  return Str;
-}
-
 CXString createDup(const char *String) {
   if (!String)
     return createNull();
@@ -75,19 +65,6 @@ CXString createDup(const char *String) {
   Str.data = strdup(String);
   Str.private_flags = CXS_Malloc;
   return Str;
-}
-
-CXString createRef(StringRef String) {
-  if (!String.data())
-    return createNull();
-
-  // If the string is empty, it might point to a position in another string
-  // while having zero length. Make sure we don't create a reference to the
-  // larger string.
-  if (String.empty())
-    return createEmpty();
-
-  return createDup(String);
 }
 
 CXString createDup(StringRef String) {
